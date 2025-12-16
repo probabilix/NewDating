@@ -37,24 +37,36 @@ outline: none;
   opacity: 0.9;
 }
 
+/* --- VERTICAL CAROUSEL ANIMATION FIX (Up-to-Down Flow) --- */
+
 @keyframes slide-down-up {
-    /* Shows photohero.png */
+    /* Shows image 1 */
     0% { transform: translateY(0); }
     
-    /* Shows photohero1.jpeg */
+    /* Hold image 1 before transition */
+    20% { transform: translateY(0); }
+    /* Slide up to image 2 */
     25% { transform: translateY(-25%); } 
 
-    /* Shows photohero2.jpeg */
+    /* Hold image 2 before transition */
+    45% { transform: translateY(-25%); } 
+    /* Slide up to image 3 */
     50% { transform: translateY(-50%); } 
 
-    /* Shows photohero3.jpeg */
+    /* Hold image 3 before transition */
+    70% { transform: translateY(-50%); } 
+    /* Slide up to image 4 */
     75% { transform: translateY(-75%); } 
 
-    /* Resets to photohero.png */
+    /* Hold image 4 before reset */
+    95% { transform: translateY(-75%); } 
+    /* Resets instantly to image 1 */
     100% { transform: translateY(0); }
 }
 
 .carousel-track {
-    /* Apply animation */
+    /* Apply animation: 20s duration, loops infinitely, linear speed */
     animation: slide-down-up 20s infinite linear;
 }
+
+/* Note: The old horizontal animation classes are removed/replaced. */

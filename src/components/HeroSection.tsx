@@ -1,27 +1,36 @@
 // src/components/HeroSection.tsx
 import React from 'react';
 
+// ----------------------------------------------------
+// Image Visual Component (16:9 Vertical Carousel)
+// ----------------------------------------------------
 const ImageVisual: React.FC = () => {
-    // Array of the 4 images (assuming they are in your public folder)
+    // Array of the 4 images (as shown in your file structure)
     const images = [
         "/photohero.png", 
         "/photohero1.jpeg", 
         "/photohero2.jpeg", 
         "/photohero3.jpeg",
     ];
+    // Calculate total height needed for the vertical track (4 images = 400%)
+    const totalTrackHeight = images.length * 100; // 400%
 
     return (
         <div className="relative w-full h-full flex items-center justify-center py-12">
             
-            {/* Outer container to hide overflow and maintain card aesthetic */}
+            {/* Outer container: Fixed to approximate 16:9 aspect ratio (500px x 281px) */}
             <div className={`
                 bg-white dark:bg-dark-surface p-2 rounded-2xl shadow-xl
-                w-[500px] h-[440px] overflow-hidden 
+                w-[500px] h-[341px] overflow-hidden 
                 transform scale-[1.05] transition-all duration-700
             `}>
                 
                 {/* Carousel Track: Holds all 4 images vertically */}
-                <div className="carousel-track w-full h-full" style={{ height: `${images.length * 70}%` }}>
+                {/* Height is 400% to contain 4 images */}
+                <div 
+                    className="carousel-track w-full flex flex-col" 
+                    style={{ height: `${totalTrackHeight}%` }} 
+                >
                     {images.map((src, index) => (
                         <div 
                             key={index} 
@@ -30,7 +39,7 @@ const ImageVisual: React.FC = () => {
                             <img
                                 src={src}
                                 alt={`Dating Coach Visual ${index + 1}`}
-                                // Ensures images fill the space cleanly, maintaining ratio
+                                // object-cover ensures no blank space while maintaining aspect ratio fill
                                 className="w-full h-full object-cover rounded-xl"
                             />
                         </div>
@@ -44,7 +53,7 @@ const ImageVisual: React.FC = () => {
 
 
 // ----------------------------------------------------
-// Hero Section Component (Color and Functionality are Intact)
+// Hero Section Component (Intact)
 // ----------------------------------------------------
 const HeroSection: React.FC = () => {
   // Uses h-screen to ensure content fits the viewport
@@ -57,14 +66,12 @@ const HeroSection: React.FC = () => {
         {/* ASMMETRICAL LAYOUT: Height adjusted for screen fit */}
         <div className="grid md:grid-cols-2 gap-10 items-center h-[calc(100vh-80px)]"> 
           
-          {/* LEFT COLUMN: TEXT & CTA (Intact) */}
+          {/* LEFT COLUMN: TEXT & CTA */}
           <div className="text-left py-8 md:py-0">
             
-            {/* Heading: Using font-serif (Playfair Display) */}
             <h1 className="font-serif text-6xl md:text-7xl lg:text-[5.5rem] font-extrabold text-gray-900 dark:text-dark-text mb-4 leading-[1.05] tracking-tight transition-colors">
               Find Your <span className="text-cta-vibrant">Dating</span> 
               <br />
-              {/* FINAL FIX: 'Edge' color reverted to original primary-soft for light mode compromise */}
               <span className="text-primary-soft">Edge</span> with AI.
             </h1>
             
@@ -84,7 +91,7 @@ const HeroSection: React.FC = () => {
             </p>
           </div>
           
-          {/* RIGHT COLUMN: VISUAL (Now the Carousel) */}
+          {/* RIGHT COLUMN: VISUAL (The Vertical Carousel) */}
           <div className="hidden md:flex justify-center items-center h-full">
             <ImageVisual /> 
           </div>
