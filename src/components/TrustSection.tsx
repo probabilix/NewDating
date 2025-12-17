@@ -5,7 +5,7 @@ import React from 'react';
 const STATS = [
     { number: '92%', label: 'Users feel more confident on dates.' },
     { number: '1.2M', label: 'Interactions analyzed daily for optimal advice.' },
-    { number: '40%', label: 'Increase in quality matches reported by early users.' },
+    { number: '80%', label: 'Increase in quality matches reported by early users.' },
 ];
 
 const TrustSection: React.FC = () => {
@@ -31,10 +31,13 @@ const TrustSection: React.FC = () => {
               We don't rely on gut feelings. Our proprietary AI processes millions of dating interactions, behavioral patterns, and psychological cues to deliver advice that is scientifically proven to work. Stop guessing, start knowing.
             </p>
             
-            {/* Immediate Final CTA (Size reduced) */}
-            <button className="text-base sm:text-xl px-8 py-3 sm:px-10 sm:py-4 bg-cta-vibrant text-white rounded-full font-bold shadow-2xl font-sans hover:bg-opacity-95 hover:scale-[1.02] transition-all duration-300 transform">
+            {/* Immediate Final CTA - MODIFIED TO <a> with /login href */}
+            <a
+                href="/login" 
+                className="inline-block text-base sm:text-xl px-8 py-3 sm:px-10 sm:py-4 bg-cta-vibrant text-white rounded-full font-bold shadow-2xl font-sans hover:bg-opacity-95 hover:scale-[1.02] transition-all duration-300 transform text-center"
+            >
                 Start Your Free Analysis
-            </button>
+            </a>
           </div>
           
           {/* RIGHT: Statistical Proof Points (ORDERED SECOND ON MOBILE) */}

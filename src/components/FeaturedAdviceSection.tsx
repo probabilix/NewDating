@@ -62,10 +62,13 @@ const FeaturedAdviceSection: React.FC = () => {
               — {FEATURED_STORY.author}
             </p>
 
-            {/* CTA Button */}
-            <button className="font-sans px-8 py-3 bg-cta-vibrant text-white rounded-full font-bold shadow-lg hover:opacity-90 transition-opacity">
+            {/* CTA Button - MODIFIED TO <a> */}
+            <a 
+                href="/login"
+                className="inline-block font-sans px-8 py-3 bg-cta-vibrant text-white rounded-full font-bold shadow-lg hover:opacity-90 transition-opacity"
+            >
               Join the Success (Start Free)
-            </button>
+            </a>
           </div>
           
         </div>

@@ -80,11 +80,14 @@ const HeroSection: React.FC = () => {
               Personalized voice coaching, real-time advice, and 12 expert personas built to make you unstoppable.
             </p>
             
-            {/* Get Started Button (CTA) */}
-            <button className="text-xl px-12 py-4 bg-cta-vibrant text-white rounded-full font-bold shadow-2xl 
-                                hover:bg-opacity-95 hover:scale-[1.02] transition-all duration-300 transform">
+            {/* Get Started Button (CTA) - MODIFIED TO <a> */}
+            <a 
+                href="/login" 
+                className="inline-block text-xl px-12 py-4 bg-cta-vibrant text-white rounded-full font-bold shadow-2xl 
+                                hover:bg-opacity-95 hover:scale-[1.02] transition-all duration-300 transform text-center"
+            >
                 Start Coaching Now
-            </button>
+            </a>
             
             <p className="font-sans mt-3 text-sm text-gray-500 dark:text-gray-500">
                 No credit card required.

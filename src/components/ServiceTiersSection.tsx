@@ -69,6 +69,7 @@ const SERVICE_TIER_DETAILS: ServiceTier[] = [
 const ServiceCard: React.FC<{ tier: ServiceTier }> = ({ tier }) => {
   const isPopular = tier.tag === 'Popular';
   const isComingSoon = tier.tag === 'Coming Soon';
+  const isLoginAction = tier.ctaAction === 'Login'; // New flag
 
   // Base styling for the card (Padding reduced on mobile)
   const cardClasses = `
@@ -89,6 +90,30 @@ const ServiceCard: React.FC<{ tier: ServiceTier }> = ({ tier }) => {
       <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full ${colorClass} flex items-center justify-center text-white font-serif text-lg sm:text-xl font-bold mb-3 sm:mb-4`}>
           {name.charAt(0)}
       </div>
+  );
+
+  const commonProps = {
+    className: `w-full py-2 sm:py-3 text-base sm:text-lg font-bold rounded-full font-sans transition-all duration-300 text-center ${buttonClasses}`,
+    disabled: isComingSoon,
+  };
+
+  const buttonElement = isLoginAction ? (
+    <a 
+      href="/login" 
+      {...commonProps} 
+      // Ensure the link acts like a block-level button
+      className={`${commonProps.className} inline-block`} 
+    >
+      {tier.ctaText}
+    </a>
+  ) : (
+    // If 'Notify', keep it as a button with the alert
+    <button 
+      {...commonProps}
+      onClick={() => alert(`You clicked: ${tier.ctaText}`)}
+    >
+      {tier.ctaText}
+    </button>
   );
 
 
@@ -130,13 +155,7 @@ const ServiceCard: React.FC<{ tier: ServiceTier }> = ({ tier }) => {
       </div>
 
       {/* CTA Button (Size reduced on mobile) */}
-      <button 
-        className={`w-full py-2 sm:py-3 text-base sm:text-lg font-bold rounded-full font-sans transition-all duration-300 ${buttonClasses}`}
-        onClick={() => alert(isComingSoon ? `You clicked: ${tier.ctaText}` : `Redirecting to Login/Join for ${tier.name}`)}
-        disabled={isComingSoon}
-      >
-        {tier.ctaText}
-      </button>
+      {buttonElement}
 
     </div>
   );

@@ -41,44 +41,62 @@ const ForgotPasswordPage: React.FC = () => {
     };
 
     return (
-        <div className="w-full max-w-md mx-auto px-4 sm:px-0 mt-10">
-            <h3 className="text-center text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
-                Forgot Password
-            </h3>
-
-            <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-3 border rounded-lg
-                               bg-white dark:bg-gray-900
-                               border-gray-300 dark:border-gray-700
-                               text-gray-900 dark:text-white"
-                />
-
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full py-3 rounded-full bg-black text-white font-bold"
-                >
-                    {loading ? 'Submitting...' : 'Submit'}
-                </button>
-
-                {message && <p className="text-green-500 text-sm">{message}</p>}
-                {error && <p className="text-red-500 text-sm">{error}</p>}
-            </form>
-
-            <p className="mt-6 text-center text-sm text-gray-700 dark:text-gray-300">
-                Remember your password?{' '}
+        <div className="min-h-screen bg-secondary-cream dark:bg-dark-background flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-500">
+            <div className="max-w-md w-full space-y-6 sm:space-y-8 p-6 sm:p-10 bg-white dark:bg-dark-surface rounded-3xl shadow-2xl relative">
+                
+                {/* NEW: Back to Login Button */}
                 <button
                     onClick={() => window.location.href = '/login'}
-                    className="font-medium underline"
+                    className="absolute top-4 left-4 text-gray-700 dark:text-gray-300 hover:text-cta-vibrant transition-colors"
+                    aria-label="Back to Login"
                 >
-                    Go back to Login
+                    {/* Simple Chevron Icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
                 </button>
-            </p>
+                
+                <div className="w-full max-w-md mx-auto px-4 sm:px-0">
+                    <h3 className="text-center text-xl sm:text-2xl font-bold text-gray-900 dark:text-dark-text mt-4">
+                        Forgot Password
+                    </h3>
+
+                    <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full px-4 py-3 border rounded-lg
+                                       bg-white dark:bg-gray-900
+                                       border-gray-300 dark:border-gray-700
+                                       text-gray-900 dark:text-white"
+                            required
+                        />
+
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full py-3 rounded-full bg-black text-white font-bold disabled:opacity-50 transition-opacity"
+                        >
+                            {loading ? 'Submitting...' : 'Submit'}
+                        </button>
+
+                        {message && <p className="text-green-500 text-sm">{message}</p>}
+                        {error && <p className="text-red-500 text-sm">{error}</p>}
+                    </form>
+
+                    <p className="mt-6 text-center text-sm text-gray-700 dark:text-gray-300">
+                        Remember your password?{' '}
+                        <button
+                            onClick={() => window.location.href = '/login'}
+                            className="font-medium underline"
+                        >
+                            Go back to Login
+                        </button>
+                    </p>
+                </div>
+            </div>
         </div>
     );
 };

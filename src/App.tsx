@@ -1,9 +1,7 @@
 // src/App.tsx
-import React, { useState } from 'react';
-import { AnimatePresence } from 'framer-motion'; 
+import React from 'react';
 
 // Core Structure Components
-import AnimatedIntro from './components/AnimatedIntro'; 
 import Header from './components/Header'; 
 import HeroSection from './components/HeroSection'; 
 
@@ -16,66 +14,87 @@ import Footer from './components/Footer';
 
 // Auth Pages
 import AuthPage from './pages/AuthPage'; 
-import ForgotPasswordPage from './pages/ForgotPasswordPage'; // <-- IMPORTED
+import ForgotPasswordPage from './pages/ForgotPasswordPage'; 
+
+// New Footer-Linked Pages
+import LegalPage from './pages/LegalPage';
+import ContactPage from './pages/ContactPage';
+import SuccessStoriesPage from './pages/SuccessStoriesPage';
+import CareersPage from './pages/CareersPage';
+import BlogPage from './pages/BlogPage';
 
 // ----------------------------------------------------
-// Landing Page Content Wrapper (UNCHANGED)
+// Landing Page Content Wrapper
 // ----------------------------------------------------
 const LandingPageContent: React.FC = () => {
-    return (
-        <div className="App">
-            <Header /> 
-            
-            <main>
-                <HeroSection />
-                <FeaturedAdviceSection /> 
-                <ServiceTiersSection /> 
-                <TrustSection />
-                <FAQSection /> 
-            </main>
-            
-            <Footer />
-        </div>
-    );
+    return (
+        <div className="App">
+            <Header /> 
+            
+            <main>
+                <HeroSection />
+                <FeaturedAdviceSection /> 
+                <ServiceTiersSection /> 
+                <TrustSection />
+                <FAQSection /> 
+            </main>
+            
+            <Footer />
+        </div>
+    );
 };
 
-
 // ----------------------------------------------------
-// Main Application Wrapper (Handles Intro Animation & Routing - UPDATED)
+// Main Application Wrapper (Handles Routing)
 // ----------------------------------------------------
 const App: React.FC = () => {
-  const [showIntro, setShowIntro] = useState(true);
-  
+  
   // Get current path
   const currentPath = window.location.pathname;
   
-  // Check for Auth routes
-  const isAuthRoute = currentPath.includes('/login');
-  const isForgotPasswordRoute = currentPath.includes('/forgot-password');
-
-  const handleAnimationComplete = () => {
-    setShowIntro(false);
-  };
-  
-  // Conditional Routing
-  if (isForgotPasswordRoute) {
-    return <ForgotPasswordPage />;
-  }
-  
-  if (isAuthRoute) {
+  // --- Auth Routes ---
+  if (currentPath.includes('/login')) {
      return <AuthPage />;
   }
+  
+  if (currentPath.includes('/forgot-password')) {
+    return <ForgotPasswordPage />;
+  }
 
-  // If we are on the home page, proceed with the intro animation.
-  return (
-    <AnimatePresence mode="wait">
-      {showIntro ? (
-        <AnimatedIntro onAnimationComplete={handleAnimationComplete} key="intro-screen" />
-      ) : (
-        <LandingPageContent key="main-app" />
-      )}
-    </AnimatePresence>
-  );
+  // --- Legal Routes ---
+  if (currentPath === '/privacy') {
+    return <LegalPage type="privacy" />;
+  }
+  
+  if (currentPath === '/terms') {
+    return <LegalPage type="terms" />;
+  }
+  
+  if (currentPath === '/cookies') {
+    return <LegalPage type="cookies" />;
+  }
+
+  // --- Company & Resource Routes ---
+  if (currentPath === '/contact') {
+    return <ContactPage />;
+  }
+
+  if (currentPath === '/stories') {
+    return <SuccessStoriesPage />;
+  }
+
+  if (currentPath === '/careers') {
+    return <CareersPage />;
+  }
+
+  if (currentPath === '/blog') {
+    return <BlogPage />;
+  }
+
+  // If no specific route matches, render the Landing Page directly.
+  return (
+    <LandingPageContent />
+  );
 };
 
 export default App;
